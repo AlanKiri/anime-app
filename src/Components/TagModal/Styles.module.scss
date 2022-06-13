@@ -1,0 +1,57 @@
+@use "../../index.scss";
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: index.$secondary-color;
+  cursor: pointer;
+
+  &:hover {
+    background-color: index.$main-color;
+  }
+
+  @media (min-width: index.$breakpoint-tablet) {
+    padding: 10px;
+  }
+  @media (min-width: index.$breakpoint-desktopXXL) {
+    padding: 14px;
+  }
+
+  .tagText {
+    color: #eee;
+
+    font-family: index.$font-family;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #eee;
+    padding: 0;
+    margin: 0;
+
+    @media (min-width: index.$breakpoint-tablet) {
+      font-size: 12px;
+      line-height: 14px;
+    }
+    @media (min-width: index.$breakpoint-desktop) {
+      font-size: 13px;
+      line-height: 15px;
+    }
+    @media (min-width: index.$breakpoint-desktopXL) {
+      font-size: 14px;
+      line-height: 18px;
+    }
+    @media (min-width: index.$breakpoint-desktopXXL) {
+      font-size: 20px;
+      line-height: 28px;
+    }
+  }
+}
+
+.enabled {
+  background-color: index.$main-color;
+}
