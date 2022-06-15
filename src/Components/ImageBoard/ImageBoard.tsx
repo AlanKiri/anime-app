@@ -1,14 +1,22 @@
 import { observer } from "mobx-react-lite";
-import { useContext, useEffect, useRef } from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import {  useContext, useEffect, useRef } from "react";
 import { Store } from "../../Stores/store";
 import Styles from "./Styles.module.scss";
 import LazyLoad from "react-lazyload";
+import Masonry from "react-masonry-css";
+
 
 const ImageBoard = observer(() => {
   const { queryStore } = useContext(Store);
   const { isGIF, isSFW, tags, images } = queryStore;
-  const ref = useRef(null);
+  const ref = useRef<HTMLImageElement>(null);
+
+  const breakpointColumnsObj = {
+    default: 6,
+    1000: 3,
+    700: 2,
+    500: 1,
+  };
 
   const getImages = async () => {
     await queryStore.getRandomImages();
@@ -32,19 +40,23 @@ const ImageBoard = observer(() => {
     }
   };
 
+
   return (
-    <Container>
-      <Row>
-        {images &&
-          images.map((image) => (
-            <Col xs={12} sm={6} md={4} lg={3}>
-              <LazyLoad width={ref.current?.width - 30}>
-                <Image ref={ref} src={image.url} alt={image.image_id} className={Styles.image} />
-              </LazyLoad>
-            </Col>
-          ))}
-      </Row>
-    </Container>
+    <Masonry breakpointCols={breakpointColumnsObj} className="my-masonry-grid">
+      {images &&
+        images.map((image) => (
+          <div className={Styles.container}>
+            {/* <LazyLoad width={ref.current?.width! - 30}> */}
+              <img
+                ref={ref}
+                src={image.url}
+                alt={image.image_id}
+                className={Styles.image}
+              />
+            {/* </LazyLoad> */}
+          </div>
+        ))}
+    </Masonry>
   );
 });
 export default ImageBoard;

@@ -4,3 +4,4 @@ declare module "*.svg" {
   export default content;
 }
 declare module "react-tag-input";
+declare module "react-lazyload";
